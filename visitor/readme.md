@@ -58,7 +58,7 @@ We will assume that there is a good reason why these animals are not placed in
 separate lists of type Cow and Horse. (Maybe they are sorted by the date they
 were worked on).
 
-I desided to expand my business and start to breed sheeps.
+I decided to expand my business and start to breed sheeps.
 
 ```java
 class Sheep extends Animal {
