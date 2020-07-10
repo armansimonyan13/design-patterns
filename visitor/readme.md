@@ -145,7 +145,7 @@ class Sheep implements Animal {
 }
 ```
 
-And now there is not need for type checks and casts:
+Now there is no need for type checks and casts:
 
 ```java
 ...
