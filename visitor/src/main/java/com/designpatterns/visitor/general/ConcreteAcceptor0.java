@@ -1,4 +1,4 @@
-package com.designpatterns.visitor;
+package com.designpatterns.visitor.general;
 
 public class ConcreteAcceptor0 implements Acceptor {
 

@@ -1,4 +1,4 @@
-package com.designpatterns.visitor;
+package com.designpatterns.visitor.general;
 
 import java.util.List;
 

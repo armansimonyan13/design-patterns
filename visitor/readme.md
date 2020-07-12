@@ -1,15 +1,20 @@
 # Visitor
 
-I have a dream. I want to have my own farm. And I decided that this is the right
-time to build it.
+## Example
+
+I am going to start a new business. I want to have my own farm. 
 
 For the beginning of my business I will start to breed cows and horses. These
-animals will be treated differently. Cows need to be milked and horses need to
-be brushed.
+animals will be treated differently. Cows need to be fed and milked.
+Horses need to be fed and brushed.
 
 ```java
 class Cow extends Animal {
 
+    public void feed() {
+        println("Cow was fed");
+    }
+    
     public void milk() {
         println("Cow was milked");
     }
@@ -19,6 +24,10 @@ class Cow extends Animal {
 
 ```java
 class Horse extends Animal {
+
+    public void feed() {
+        println("Horse was fed");
+    }
 
     public void brush() {
         println("Horse was brushed");
@@ -42,9 +51,13 @@ class Worker {
     void work() {
         animals.forEach(animal -> {
             if (animal instanceOf Cow) {
-                ((Cow) animal).milk();
+                Cow cow = (Cow) animal;
+                cow.feed();
+                cow.milk();
             } else if (animal instanceOf Horse) {
-                ((Horse) animal).brush();
+                Horse horse = (Horse) animal;
+                horse.feed();
+                horse.brush();
             } else {
                 throw new NotSupportedAnimalException();
             }
@@ -54,16 +67,20 @@ class Worker {
 }
 ```
 
-We will assume that there is a good reason why these animals are not placed in
+Note: We will assume that there is a good reason why these animals are not placed in
 separate lists of type Cow and Horse. (Maybe they are sorted by the date they
-were worked on).
+were taken care of).
 
 I decided to expand my business and start to breed sheeps.
 
 ```java
 class Sheep extends Animal {
 
-    void shave() {
+    public void feed() {
+        println("Sheep was fed");
+    }
+
+    public void shave() {
         println("Sheep was shaved");
     }
 
@@ -77,11 +94,17 @@ My worker needs to be tranined to work also with sheeps:
     void work() {
         animals.forEach(animal -> {
             if (animal instanceOf Cow) {
-                ((Cow) animal).milk();
+                Cow cow = (Cow) animal;
+                cow.feed();
+                cow.milk();
             } else if (animal instanceOf Horse) {
-                ((Horse) animal).brush();
+                Horse horse = (Horse) animal;
+                horse.feed();
+                horse.brush();
             } else if (animal instanceOf Sheep) {
-                ((Sheep) animal).shave();
+                Sheep sheep = (Sheep) animal;
+                sheep.feed();
+                sheep.shave();
             } else {
                 throw new NotSupportedAnimalException();
             }
@@ -95,19 +118,22 @@ will separate this huge responsibility into smaller ones:
 
 ```java
 void visit(Cow cow) {
+    cow.feed();
     cow.milk();
 }
 
 void visit(Horse horse) {
+    horse.feed();
     horse.brush();
 }
 
 void visit(Sheep sheep) {
+    sheep.feed();
     sheep.shave();
 }
 ```
 
-And our animals will accept our worker:
+And the animals will accept the worker:
 
 ```java
 interface Animal {
@@ -156,5 +182,3 @@ Now there is no need for type checks and casts:
     }
 ...
 ```
-
-Isn't it beautiful when we harness polymorphic capabilities of OOP.
